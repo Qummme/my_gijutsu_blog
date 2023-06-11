@@ -18,8 +18,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: "なにかいいこと伝えたい"
-description: "SEとかやってるつもりの人のブログです。学んだことを嚙み砕いて吐き出していきます。"
+title: "なにかいいこと教えたい"
+description: "SEとかやってる（はず）の人のブログです。学んだことを嚙み砕いて吐き出していきます。"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: nannka_tekit0

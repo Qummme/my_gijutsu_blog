@@ -1,0 +1,201 @@
+---
+layout: post
+title:  "AWS SOA"
+date:   2023-06-11 01:46:00 +0000
+categories: jekyll update
+---
+# モニタリング・ロギング・通知
+
+![モニタリング・ロギング・通知]({{site.baseurl}}/assets/images/AWS_SOA_02-1.drawio.png "モニタリング・ロギング・通知")
+
+### 各サービスの説明
+■各サービスを一言で説明
+<details>
+<summary>Amazon CloudWatch</summary>
+AWSの各種リソースを収集・監視・可視化するマネージドサービス
+</details>
+<details>
+<summary>Amazon CloudWatch メトリクス</summary>
+AWSリソースから収集されるの死活、性能、キャパシティ等のデータ
+</details>
+<details>
+<summary>Amazon CloudWatch ダッシュボード</summary>
+AWSリソースのメトリクスおよびアラームをカスタマイズした状態で表示（可視化）することができるWebベースダッシュボードページ
+</details>
+<details>
+<summary>Amazon CloudWatch Alarm</summary>
+CloudWatchのメトリクスやログの条件を検知してメールなどによる通知をするサービス
+</details>
+<details>
+<summary>Amazon CloudWatch Logs</summary>
+Logsで収集したデータに対してクエリを発行したり、分析を行う機能
+</details>
+<details>
+<summary>Amazon CloudWatch Logs Insights</summary>
+AWSリソースからログを収集・保存するサービス
+</details>
+<details>
+<summary>AWS Health</summary>
+リソースのパフォーマンス、AWSサービスおよびアカウントの可用性を可視化するサービス
+</details>
+<details>
+<summary>AWS CloudTrail</summary>
+アクティビティ監視のサービス。
+AWSサービスで使用したAPIコールを記録し、「いつ」「誰が」「何を」したのかを確認できる。
+</details>
+<details>
+<summary>VPCフローログ</summary>
+ネットワーク監視のサービス。
+VPCのネットワークインターフェースとの間で行き来するIPトラフィックに関する情報をキャプチャできるようにする機能。
+</details>
+<details>
+<summary>Amazon EventBridge</summary>
+イベント（アプリケーションやサービスなどの環境での変化）を検出し、後続処理を行うためのサービス。
+</details>
+<details>
+<summary>Amazon Simple Queue Service</summary>
+フルマネージド型メッセージキューイングサービス。
+アプリ間連携にSQSを利用することで疎結合アーキテクチャを実現することができる。
+</details>
+<details>
+<summary>Amazon Simple Notification Service</summary>
+フルマネージド型分散通知サービス。
+Pub/Subメッセージング、モバイルPUSH通知等を実現する。
+</details>
+<details>
+<summary>Amazon Simple Email Service</summary>
+アプリケーションでメールを送信できるようにする、マネージド型のSMTP（メール）サービス。
+</details>
+
+### Amazon CloudWatch
+
+■メトリクス
+
+- 標準メトリクス
+  - AWSリソースからCloudWatchに送信されるデフォルトのメトリクス
+  - EC2等のIaaSサービスでは<span style="color: white; ">ハイパーバイザー</span>から取得可能な情報がメトリクスとして自動的に提供される。
+- カスタムメトリクス
+  - 標準メトリクスで取得できないデータを取得するために使用する
+  - EC2等のIaaSサービスではOS内部で管理されている情報を収集することが可能。
+
+<details>
+<summary>EC2カスタムメトリクスの例3つ</summary>
+・メモリ利用率<br>
+・EBSのディスク利用率<br>
+・作成したアプリケーションで利用するメトリクス（Webセッション数、利用ユーザ数等）<br>
+</details>
+
+- モニタリング間隔
+  - 基本モニタリング
+    - デフォルトで有効なモニタリング
+    - <span style="color: white; ">5</span>分間隔で取得
+    - 料金：<span style="color: white; ">無料</span>
+  - 詳細モニタリング
+    - オプションで有効なモニタリング
+    - <span style="color: white; ">1</span>分間隔で取得
+    - 料金：<span style="color: white; ">追加料金</span>
+
+■ロギング
+
+- メトリクスフィルター
+  - ログから特定の文字列をフィルタリングする機能
+  - メトリクスからアラームを作成することも可能
+
+■サービス全般
+
+- 無料利用枠
+<details>
+<summary>メトリクス</summary>
+・基本メトリクス<br>
+・詳細モニタリングのメトリクス10個<br>
+・カスタムリクエスト10個<br>
+・100マンAPIリクエスト（GetMetricData等を除く）<br>
+</details>
+<details>
+<summary>ダッシュボード</summary>
+・最大50このメトリクスに対応するダッシュボード3個<br>
+</details>
+<details>
+<summary>ログ</summary>
+・5GBまでのデータ
+</details>
+<details>
+<summary>アラーム</summary>
+・10件のアラームメトリクス
+</details>
+
+- アクセス方法
+<details>
+<summary>アクセス方法4つ</summary>
+・Amazon CloudWatchコンソール<br>
+・AWS CLI<br>
+・CloudWatch API<br>
+・AWS SDK<br>
+</details>
+
+### AWS Health
+
+- AWS Healthダッシュボードの料金：<span style="color: white; ">無料</span>
+- AWS Health APIを利用可能なプラン：<span style="color: white; ">Business、Enterprise</span>
+  - AWS Health APIを利用して社内およびサードパーティのシステムと統合可能
+
+### AWS CloudTrail
+
+- CloudTrailは<span style="color: white; ">リージョン</span>レベルのサービス
+<details>
+<summary>ログ保管先2つ</summary>
+・S3バケット<br>
+・CloudWatch Logs（オプション）<br>
+</details>
+
+### SQS
+
+■非同期処理
+
+- クライアントのプロセスはメッセージをSQSに送った時点で完了
+- ワーカーはSQSにバッファされたメッセージを取りに行き処理を実行
+- リトライ処理はワーカー側で実行
+
+(ChatGPT先生に質問)
+
+Q. アプリケーションの非同期処理について、端的にわかりやすく簡単な例を交えて教えて
+
+A. …非同期処理は、プログラム内で複数のタスクを同時に実行する方法です。通常、プログラムは一つのタスクを実行し終えるまで待ってから、次のタスクに移ります。しかし、非同期処理を使用すると、一つのタスクが終了するのを待たずに、他のタスクを同時に実行できます。
+
+例えば、ウェブアプリケーションでユーザーが画像をアップロードする場合を考えてみましょう。非同期処理を使用しない場合、アップロードされた画像が処理されるまで、他のユーザーは待たされる可能性があります。しかし、非同期処理を使用することで、アップロードされた画像の処理をバックグラウンドで実行し、ユーザーは他の操作を続けることができます。…
+
+### SNS
+
+■Pub/Subメッセージング
+
+(ChatGPT先生に質問)
+
+Q. Pub/Subメッセージングについて、端的にわかりやすく例を交えて教えて
+
+A. Pub/Subメッセージングは、メッセージの送信者（パブリッシャー）と受信者（サブスクライバー）の間で非同期にメッセージをやり取りする方法です。
+
+例えば、ソーシャルメディアのフォロー通知を考えてみましょう：
+
+パブリッシャー：ユーザーAが新しい投稿を行った場合、その投稿情報をメッセージとして発行します。
+サブスクライバー：ユーザーBは、ユーザーAをフォローしているため、ユーザーAの投稿通知を受け取るためにサブスクリプション（購読）を作成します。
+パブリッシャーはユーザーAの新しい投稿があるたびに、その投稿情報をトピック（例：「ユーザーAの投稿」）に対して発行します。
+サブスクライバーであるユーザーBは、ユーザーAの投稿に関連するトピックに購読しているため、新しい投稿情報を受信します。
+このように、パブリッシャーとサブスクライバーが別々の役割を持ち、非同期にメッセージを送受信します。Pub/Subメッセージングは、大規模なシステムや分散アーキテクチャでよく使用され、メッセージングの効率的な処理とスケーラビリティを実現します。
+
+■サブスクリプション先
+
+- Eメール
+  - JSON形式での送付も可能
+- HTTP(S)
+- SMS
+- SQS
+  - SNSとSQSを組み合わせた構成を<span style="color: white; ">Fanout</span>構成という
+
+### SES
+
+- マネージドサービスのためメールサーバの管理・死活監視などの工数が不要に
+- SNSではできないがSESではできること
+  - メール受信
+  - 独自ドメインのメールアドレス使用
+  - ファイル添付
+  - HTMLメール

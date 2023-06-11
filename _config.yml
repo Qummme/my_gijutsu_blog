@@ -20,8 +20,8 @@
 
 title: "なにかいいこと教えたい"
 description: "SEとかやってる（はず）の人のブログです。学んだことを嚙み砕いて吐き出していきます。"
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/my_gijutsu_blog"
+url: "https://Qummme.github.io/"
 twitter_username: nannka_tekit0
 github_username:  Qummme
 
